@@ -6,6 +6,7 @@ import org.example.projectmongodb.dto.AuthorDTO;
 import org.example.projectmongodb.repository.PostRepository;
 import org.example.projectmongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.SmartInstantiationAwareBeanPostProcessor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
@@ -41,6 +42,9 @@ public class Instantiation implements CommandLineRunner {
         Post post2 = new Post(null, simpleDateFormat.parse("02/06/2022"), "Hoje é meu aniversário", "Faço 17 anos!", new AuthorDTO(davi));
 
         postRepository.saveAll(Arrays.asList(post1, post2));
+
+        davi.getPosts().addAll(Arrays.asList(post1, post2));
+        userRepository.save(davi);
     }
 
 }
