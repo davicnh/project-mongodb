@@ -2,6 +2,7 @@ package org.example.projectmongodb.config;
 
 import org.example.projectmongodb.domain.Post;
 import org.example.projectmongodb.domain.User;
+import org.example.projectmongodb.dto.AuthorDTO;
 import org.example.projectmongodb.repository.PostRepository;
 import org.example.projectmongodb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +35,11 @@ public class Instantiation implements CommandLineRunner {
         User ianes = new User(null, "Ianes Carla", "ianes@gmail.com");
         User joao = new User(null, "Joao Pedro", "joao@gmail.com");
 
-        Post post1 = new Post(null, simpleDateFormat.parse("21/03/2018"), "Partiu viagem!", "Vou viajar para Ouro Preto, abraços!", davi);
-        Post post2 = new Post(null, simpleDateFormat.parse("02/06/2022"), "Hoje é meu aniversário", "Faço 17 anos!", davi);
-
         userRepository.saveAll(Arrays.asList(davi, ianes, joao));
+
+        Post post1 = new Post(null, simpleDateFormat.parse("21/03/2018"), "Partiu viagem!", "Vou viajar para Ouro Preto, abraços!", new AuthorDTO(davi));
+        Post post2 = new Post(null, simpleDateFormat.parse("02/06/2022"), "Hoje é meu aniversário", "Faço 17 anos!", new AuthorDTO(davi));
+
         postRepository.saveAll(Arrays.asList(post1, post2));
     }
 
