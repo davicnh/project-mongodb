@@ -1,5 +1,6 @@
 package org.example.projectmongodb.resources;
 
+import org.example.projectmongodb.domain.Post;
 import org.example.projectmongodb.domain.User;
 import org.example.projectmongodb.dto.UserDTO;
 import org.example.projectmongodb.services.UserService;
@@ -51,5 +52,11 @@ public class UserResource {
         obj.setId(id);
         obj = service.update(obj);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj.getPosts());
     }
 }
